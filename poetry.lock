@@ -312,6 +312,17 @@ Werkzeug = ">=0.7"
 docs = ["sphinx", "sphinx-rtd-theme"]
 
 [[package]]
+name = "python-dotenv"
+version = "0.17.1"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "pyyaml"
 version = "5.4.1"
 description = "YAML parser and emitter for Python"
@@ -386,7 +397,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.9"
-content-hash = "a27c6ea5819bac8d4836820249506d6ac62cdfc0acdbb0d35fdeeafdde100a13"
+content-hash = "f5df3c7e079eb05318df04c8db6f708a01e6fd8e6d211fbdcce3b0f6ba0e2743"
 
 [metadata.files]
 appdirs = [
@@ -581,6 +592,10 @@ pytest = [
 pytest-flask = [
     {file = "pytest-flask-1.2.0.tar.gz", hash = "sha256:46fde652f77777bf02dc91205aec4ce20cdf2acbbbd66a918ab91f5c14693d3d"},
     {file = "pytest_flask-1.2.0-py3-none-any.whl", hash = "sha256:fe25b39ad0db09c3d1fe728edecf97ced85e774c775db259a6d25f0270a4e7c9"},
+]
+python-dotenv = [
+    {file = "python-dotenv-0.17.1.tar.gz", hash = "sha256:b1ae5e9643d5ed987fc57cc2583021e38db531946518130777734f9589b3141f"},
+    {file = "python_dotenv-0.17.1-py2.py3-none-any.whl", hash = "sha256:00aa34e92d992e9f8383730816359647f358f4a3be1ba45e5a5cefd27ee91544"},
 ]
 pyyaml = [
     {file = "PyYAML-5.4.1-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:3b2b1824fe7112845700f815ff6a489360226a5609b96ec2190a45e62a9fc922"},
