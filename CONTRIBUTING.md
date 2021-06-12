@@ -2,7 +2,7 @@
 
 ## Initial Setup
 
-As prerequisites, Python 3.9 and [poetry] are required. Once those are installed, install the project's dependencies:
+As prerequisites, Python 3.9 and [poetry] are required. Once those are installed, `cd` into the project's root directory and install the project's dependencies:
 
 ```bash
 poetry install
@@ -12,6 +12,13 @@ Next, install the pre-commit hook to ensure the linters will run upon a commit:
 
 ```bash
 poetry run pre-commit install
+```
+
+Create a `.env` file in the project's root directory and write the following to it:
+
+```
+FLASK_ENV=development
+SPOONACULAR_KEY=your_key
 ```
 
 ## Running the Website
