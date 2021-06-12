@@ -13,7 +13,7 @@ python = "~3.9"
 whitenoise = "~5.2"
 
 [tool.poetry.dev-dependencies]
-black = "=21.5b2"
+black = "=21.6b0"
 coverage = "~= 5.5"
 pre-commit = "~2.13.0"
 pytest = "~6.2"
