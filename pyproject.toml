@@ -8,8 +8,10 @@ license = "MIT"
 [tool.poetry.dependencies]
 flask = "~2.0.1"
 flask-cdn = "=1.5.3"
+flask-limiter = "~1.4"
 gunicorn = "~20.1"
 python = "~3.9"
+requests = "~2.25"
 whitenoise = "~5.2"
 
 [tool.poetry.dev-dependencies]
