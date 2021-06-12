@@ -31,8 +31,11 @@ def create_app():
     cdn.init_app(app)
 
     # Important to import views after the app is created.
-    from web import recipes
+    from web import api, recipes
 
+    api.limiter.init_app(app)
+
+    app.register_blueprint(api.bp, url_prefix="/api")
     app.register_blueprint(recipes.bp)
     app.add_url_rule("/", endpoint="index")
 
