@@ -4,8 +4,8 @@ from flask import current_app as app, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-bp = flask.Blueprint("api", __name__)
-limiter = Limiter(key_func=get_remote_address)
+bp = flask.Blueprint("api", __name__) """Flask Blueprint"""
+limiter = Limiter(key_func=get_remote_address) """Rate limiting by remote_address of the request"""
 session = requests.Session()
 
 
@@ -37,3 +37,21 @@ def search_api():
 
     response = spoonacular_get("recipes/complexSearch", request.args)
     return response.json()
+
+
+
+@bp.route("/ingredients")
+@limiter.limit("1/minute)
+def ingredient_api():
+     #Disallow these to convserve the request quota.
+     for arg in ("ingredientList", "servings"):
+        if request.args.get(arg) == "true":
+            abort_with_json(403,error=f"{arg} is disabled.")
+    response = spoonacular_get("recipes/parseIngredients", request.args)
+    return response.json()
+    
+
+               
+
+
+
