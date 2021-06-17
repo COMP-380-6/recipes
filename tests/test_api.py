@@ -1,5 +1,8 @@
+from unittest.mock import create_autospec
+
 import flask
 import pytest
+from werkzeug import exceptions
 
 
 SPOONACULAR_BASE = "https://api.spoonacular.com/recipes/"
@@ -49,6 +52,24 @@ def test_spoonacular_error_forwarded(client, requests_mock, endpoint, spoonacula
 
     assert res.status_code == data["code"]
     assert res.get_json() == data
+
+
+@pytest.mark.parametrize("endpoint", ("api.search_api", "api.ingredient_api"))
+@pytest.mark.parametrize("error", (exceptions.BadRequest(), exceptions.InternalServerError()))
+def test_error_json_response(client, endpoint, error):
+    """Errors should return responses in JSON."""
+    client.application.view_functions[endpoint] = create_autospec(
+        client.application.view_functions[endpoint], spec_set=True, side_effect=error
+    )
+
+    res = client.get(flask.url_for(endpoint))
+
+    assert res.status_code == error.code
+    assert res.get_json() == dict(
+        status="failure",
+        code=error.code,
+        message=f"{error.name}: {error.description}",
+    )
 
 
 @pytest.mark.parametrize("param", ("fillIngredients", "addRecipeNutrition"))
