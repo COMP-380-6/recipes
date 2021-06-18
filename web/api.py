@@ -2,7 +2,8 @@ import json
 
 import flask
 import requests
-from flask import current_app as app, request
+from flask import current_app as app
+from flask import request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.exceptions import HTTPException
