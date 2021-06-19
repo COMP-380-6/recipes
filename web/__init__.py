@@ -34,6 +34,7 @@ def create_app():
     from web import api, recipes
 
     api.limiter.init_app(app)
+    api.session.params = {"apiKey": app.config["SPOONACULAR_KEY"]}
 
     app.register_blueprint(api.bp, url_prefix="/api")
     app.register_blueprint(recipes.bp)
