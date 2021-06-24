@@ -22,6 +22,7 @@ export class RecipeManager {
         const params = {
             includeIngredients: ingredients.map((i) => i.name).join(","),
             addRecipeInformation: "true",
+            fillIngredients: "true",
             cuisine: cuisine.value,
             type: type.value,
             sort: sort.value,
