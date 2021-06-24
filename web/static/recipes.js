@@ -89,11 +89,20 @@ export class RecipeManager {
 
         trigger.setAttribute("data-bs-target", "#" + modal.id);
 
-        modal.addEventListener("click", (e) => this.changeModalPage(e, modal));
+        for (const pageLink of modal.querySelectorAll(".page-link")) {
+            pageLink.addEventListener("click", (e) =>
+                this.changeModalPage(e, modal)
+            );
+        }
     }
 
     changeModalPage(event, modal) {
-        const activeLink = modal.querySelector(".page-item.active a");
+        const activeLink = modal.querySelector(".page-item.active .page-link");
+        if (event.target === activeLink) {
+            // Exit early if the selected page is already the current page.
+            return;
+        }
+
         let pageClass = activeLink.getAttribute("data-page");
 
         // Hide the current page and make it inactive.
