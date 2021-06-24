@@ -122,15 +122,16 @@ export class RecipeManager {
             clone.id = `req-ingr-${ingredient.id}`;
 
             const name = clone.querySelector(".name");
-            name.textContent = ingredient.nameClean;
+            name.textContent = ingredient.name;
 
             const quantity = clone.querySelector(".quantity");
             quantity.textContent = `${+ingredient.amount.toFixed(2)} `;
             quantity.textContent += ingredient.unit;
 
             const image = clone.querySelector("img");
-            image.title = `${quantity.textContent} ${ingredient.nameClean}`;
-            image.src = `https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`;
+            const imageName = ingredient.image ?? "no.jpg";
+            image.title = `${quantity.textContent} ${ingredient.name}`;
+            image.src = `https://spoonacular.com/cdn/ingredients_100x100/${imageName}`;
 
             template.parentElement.appendChild(clone);
         }
