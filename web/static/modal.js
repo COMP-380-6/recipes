@@ -137,6 +137,7 @@ export class RecipeModal extends PaginatedModal {
         const image = clone.querySelector("img");
         const imageName = data.image || "no.png";
         image.src = `https://spoonacular.com/cdn/${type}_100x100/${imageName}`;
+        image.title = data.name;
 
         template.parentElement.appendChild(clone);
         return clone;
