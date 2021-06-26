@@ -8,7 +8,7 @@ const DEFAULTS = {
   showValue: false,
 };
 
-class Autocomplete {
+export class Autocomplete {
   constructor(field, options) {
     this.field = field;
     this.options = Object.assign({}, DEFAULTS, options);
