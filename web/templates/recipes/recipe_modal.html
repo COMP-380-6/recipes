@@ -1,0 +1,33 @@
+<div id="recipe-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5">
+                {% for template, _ in modal_pages %}
+                    <div id="modal-pg-{{ loop.index }}"
+                         class="{{ "d-none" if loop.index0 else "" }}">
+                        {% include template %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer justify-content-center">
+                <nav aria-label="Recipe details navigation">
+                    <ul class="pagination m-0">
+                        {% for _, name in modal_pages %}
+                            <li class="page-item{{ "" if loop.index0 else " active" }}">
+                                <a class="page-link" data-page="#modal-pg-{{ loop.index }}"
+                                   aria-current="{{ "page" if loop.index == 1 else "false" }}">
+                                    {{ name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

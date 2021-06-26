@@ -1,13 +1,16 @@
 import json
+from pathlib import Path
 
 import flask
 import requests
+from flask import current_app as app
 from flask import request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.exceptions import HTTPException
 
 SPOONACULAR_BASE = "https://api.spoonacular.com/recipes/"
+DEBUG_DATA_PATH = Path("recipe_data.json")
 
 bp = flask.Blueprint("api", __name__)
 limiter = Limiter(key_func=get_remote_address)
@@ -51,9 +54,12 @@ def handle_requests_exception(error: requests.HTTPError):
 @limiter.limit("1/minute", deduct_when=lambda r: r.status_code == 200)
 def search_api():
     # Disallow these to conserve the request quota.
-    for arg in ("fillIngredients", "addRecipeNutrition"):
+    for arg in ("addRecipeNutrition",):
         if request.args.get(arg) == "true":
             flask.abort(403, description=f"{arg} is disabled.")
+
+    if app.config.get("DEBUG") and DEBUG_DATA_PATH.exists():
+        return DEBUG_DATA_PATH.read_text(encoding="utf8"), 201, {"content-type": "application/json"}
 
     response = session.get(f"{SPOONACULAR_BASE}complexSearch", params=request.args)
     return response.text, 200, {"content-type": "application/json"}

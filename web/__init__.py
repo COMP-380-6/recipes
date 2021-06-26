@@ -1,3 +1,4 @@
+import mimetypes
 import os
 import warnings
 
@@ -14,6 +15,7 @@ except ImportError:
     pass
 
 cdn = CDN()
+mimetypes.add_type("application/javascript", ".js")  # Ensure JS modules use the right mimetype.
 
 
 def create_app():
@@ -25,6 +27,9 @@ def create_app():
     except KeyError:
         app.config["SPOONACULAR_KEY"] = None
         warnings.warn("A Spoonacular API key was not provided!")
+
+    if app.config.get("DEBUG"):
+        app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 
     # Serving through CDN is auto-disabled when in debug mode.
     app.wsgi_app = WhiteNoise(app.wsgi_app, root="web/static/", prefix="static/")

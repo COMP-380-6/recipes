@@ -1,1 +1,113 @@
-/* nothing to see yet */
+/* By default, it's inline. However, Bootstrap displays normal controls as blocks. */
+.bootstrap-select {
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Hide the caret since form-select has its own. */
+.form-select.dropdown-toggle::after {
+    display: none !important;
+}
+
+.container {
+    max-width: 960px;
+}
+
+/*
+Normally the gutter uses padding. However, a wrapper element for a col is avoided and the ingredient
+class is a direct child of the row. It needs its own padding, so margins have to be used. Changing
+the gutter width with gx-* would cause misalignment with adjacent rows. Instead, change divide it
+here by 4 rather than by 2.
+*/
+#ingredients > * {
+    margin-right: calc(var(--bs-gutter-x) / 4);
+    margin-left: calc(var(--bs-gutter-x) / 4);
+    margin-top: var(--bs-gutter-y);
+}
+
+/* The gutter on the edges needs to add up to the original width so it aligns with adjacent rows. */
+#ingredients {
+    padding-right: calc(var(--bs-gutter-x) / 4);
+    padding-left: calc(var(--bs-gutter-x) / 4);
+}
+
+.ingredient {
+    padding: 0.25rem 0.75rem;
+    align-items: center;
+    flex: 0 0 !important; /* Make the container the size of its content. */
+    white-space: nowrap; /* Ensure text is on a single line. */
+}
+
+.ingredient .btn-close {
+    padding: 0; /* Easier to reason about aligning it when the X directly touches the edges. */
+    margin-left: 0.5rem; /* Some space between the text and icon */
+    background-size: 0.75rem; /* Make its size closer to the size of the text. */
+}
+
+/* Colour the tooltip's arrow the same as inner's border */
+.ingredient-tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #dee2e6;
+}
+
+.ingredient-tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: #dee2e6;
+}
+
+.ingredient-tooltip.bs-tooltip-start .tooltip-arrow::before {
+    border-left-color: #dee2e6;
+}
+
+.ingredient-tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: #dee2e6;
+}
+
+.ingredient-tooltip.show {
+    opacity: 1;
+}
+
+#ingredient-template,
+#recipe-template,
+#req-ingr-template,
+#req-equip-template {
+    display: none;
+}
+
+.recipe {
+    font-size: 0.95rem;
+}
+
+/* Set parent to relative to enabled the use of absolute positioning. */
+.text-overlay-container {
+    position: relative;
+}
+
+.text-overlay {
+    z-index: -1; /* Hide it by default. */
+    user-select: none; /* Disable text selection since the element behind may be clickable */
+    overflow: hidden;
+    pointer-events: none;
+
+    /* Overlay it by using absolute positioning. */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    /* Darken the background to make the text stand out. */
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+.text-overlay-container:hover > .text-overlay {
+    z-index: 1; /* Display it on hover. */
+}
+
+.recipe-img,
+#recipe-modal .modal-footer .page-link {
+    cursor: pointer;
+}
+
+.req-ingr img,
+.req-equip img {
+    height: 70px;
+    object-fit: contain;
+}
