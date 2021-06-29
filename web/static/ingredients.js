@@ -114,9 +114,10 @@ export class IngredientManager {
     }
 
     add(event, selection) {
+        event.preventDefault();
         if (this.input.element.value !== selection?.label) {
             // TODO: display error because the input doesn't match a selection.
-            return;
+            return false;
         } else if (!this.ingredients.has(selection.label)) {
             this.ingredients.add(selection.label);
             const node = this.show(selection.label);
@@ -126,6 +127,7 @@ export class IngredientManager {
         }
 
         this.input.element.value = ""; // Clear the input bar.
+        return false;
     }
 
     show(name) {
