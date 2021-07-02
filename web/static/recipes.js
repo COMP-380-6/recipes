@@ -13,7 +13,6 @@ export class RecipeManager {
     constructor(ingredientManager, apiClient) {
         this.ingredientManager = ingredientManager;
         this.api = apiClient;
-
         this.modal = undefined;
     }
 
@@ -68,10 +67,12 @@ export class RecipeManager {
      * @returns {Promise<void>}
      */
     async search() {
+        if (this.ingredientManager.ingredients.size === 0) {
+            return false;
+        }
         // TODO: check response status code.
         const response = await this.api.get("search", this.buildParams());
         const results = await response.json();
-
         this.showAll(results.results);
     }
 
