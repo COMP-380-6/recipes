@@ -24,6 +24,7 @@
         "@types/js-levenshtein": "^1.1.0",
         "bootstrap": "^5.0.2",
         "bootstrap-select": "^1.14.0-beta2",
+        "dayjs": "^1.10.5",
         "js-levenshtein": "^1.1.6",
         "tslib": "^2.3.0"
     }
