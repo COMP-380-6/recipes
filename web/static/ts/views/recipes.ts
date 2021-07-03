@@ -122,9 +122,11 @@ export class RecipesView implements IObserver<Recipe[]> {
             throw new TypeError("Cannot find all search option elements.");
         }
 
+        const cuisines = (cuisine as HTMLSelectElement).selectedOptions;
+
         await this._controller.onSearch(
             (sort as HTMLSelectElement).value,
-            (cuisine as HTMLSelectElement).value,
+            Array.from(cuisines).map((o) => o.value),
             (type as HTMLSelectElement).value,
             (time as HTMLInputElement).value
         );
