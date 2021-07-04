@@ -1,21 +1,24 @@
 import {Recipes} from "../models/recipes";
 import {SelectedIngredients} from "../models/ingredients";
-import {PaginatedModalModel} from "../models/modal";
+import {PaginatedModalModel, Quantities} from "../models/modal";
 import {Recipe} from "../models/spoonacular";
 
 export class RecipesController {
-    private _recipes: Recipes;
-    private _ingredients: SelectedIngredients;
-    private _modal: PaginatedModalModel<Recipe>;
+    private readonly _recipes: Recipes;
+    private readonly _ingredients: SelectedIngredients;
+    private readonly _modal: PaginatedModalModel<Recipe>;
+    private readonly _quantities: Quantities;
 
     constructor(
         recipesModel: Recipes,
         ingredientsModel: SelectedIngredients,
-        modalModel: PaginatedModalModel<Recipe>
+        modalModel: PaginatedModalModel<Recipe>,
+        quantitiesModel: Quantities
     ) {
         this._recipes = recipesModel;
         this._ingredients = ingredientsModel;
         this._modal = modalModel;
+        this._quantities = quantitiesModel;
     }
 
     public async onSearch(
@@ -37,5 +40,9 @@ export class RecipesController {
         }
 
         this._modal.data = recipe;
+    }
+
+    public onUnitChange(unitType: string) {
+        this._quantities.type = unitType;
     }
 }
