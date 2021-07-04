@@ -32,7 +32,7 @@ export abstract class ModalPage<T> implements IObserver<ModalMessage<T>> {
         this._controller = controller;
 
         const body = this._modal.querySelector(
-            `.modal-body *[data-page=${page}]`
+            `.modal-body *[data-page="${page}"]`
         );
         if (body === null) {
             throw new TypeError(`Can't find page ${page}'s body.`);
@@ -43,7 +43,7 @@ export abstract class ModalPage<T> implements IObserver<ModalMessage<T>> {
         // Note that the selector has parents. This means parentElement
         // shouldn't be null despite TypeScript's warnings.
         const link = this._modal.querySelector(
-            `.modal-footer .page-item .page-link[data-page=${page}]`
+            `.modal-footer .page-item .page-link[data-page="${page}"]`
         );
         if (link === null) {
             throw new TypeError(`Can't find page ${page}'s nav anchor.`);
