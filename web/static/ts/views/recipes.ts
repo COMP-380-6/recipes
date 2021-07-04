@@ -2,6 +2,7 @@ import {IObserver} from "../observe";
 import {Recipe} from "../models/spoonacular";
 import {RecipesController} from "../controllers/recipes";
 import {Message} from "../observe";
+import {Modal} from "bootstrap";
 
 export class RecipesView implements IObserver<Message<Recipe[]>> {
     private readonly _controller: RecipesController;
@@ -70,6 +71,9 @@ export class RecipesView implements IObserver<Message<Recipe[]>> {
             throw new TypeError("Recipe template lacks an image element.");
         } else {
             (image as HTMLImageElement).src = recipe.image;
+            image.addEventListener("click", () => {
+                this._controller.onClick(recipe);
+            });
         }
 
         const health = clone.querySelector(".recipe-healthiness");
@@ -92,8 +96,6 @@ export class RecipesView implements IObserver<Message<Recipe[]>> {
         } else {
             price.textContent = (recipe.pricePerServing / 100).toFixed(2);
         }
-
-        clone.addEventListener("click", () => this._controller.onClick(recipe));
 
         this._parent.appendChild(clone);
     }

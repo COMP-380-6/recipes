@@ -1,15 +1,12 @@
 import {IObserver} from "../../observe";
 import {ModalMessage} from "../../models/modal";
-import {Modal} from "bootstrap";
 import {PaginatedModalController} from "../../controllers/modal";
 
 export abstract class PaginatedModal<T> implements IObserver<ModalMessage<T>> {
     protected readonly _element: Element;
-    protected readonly _modal: Modal;
 
-    constructor(element: Element, options?: Partial<Modal.Options>) {
+    constructor(element: Element) {
         this._element = element;
-        this._modal = new Modal(element, options);
     }
 
     abstract update(message: ModalMessage<T>): void;
