@@ -27,6 +27,10 @@ export class PaginatedModalModel<T> extends BaseObservable<ModalMessage<T>> {
     }
 
     public set page(page: number) {
+        if (!Number.isInteger(page)) {
+            throw new TypeError("Page number must be an integer.");
+        }
+
         this._page = page;
         if (this._data !== undefined) {
             // Only notify page changes if data has been set.
