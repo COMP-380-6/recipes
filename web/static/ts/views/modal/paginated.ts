@@ -7,7 +7,7 @@ export abstract class PaginatedModal<T> implements IObserver<ModalMessage<T>> {
     protected readonly _element: Element;
     protected readonly _modal: Modal;
 
-    protected constructor(element: Element, options?: Partial<Modal.Options>) {
+    constructor(element: Element, options?: Partial<Modal.Options>) {
         this._element = element;
         this._modal = new Modal(element, options);
     }

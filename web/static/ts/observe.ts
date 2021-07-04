@@ -15,7 +15,7 @@ export interface IObserver<T> {
 export abstract class BaseObservable<T> implements IObservable<T> {
     protected _observers: IObserver<T>[];
 
-    protected constructor() {
+    constructor() {
         this._observers = [];
     }
 
