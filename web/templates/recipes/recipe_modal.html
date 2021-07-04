@@ -8,8 +8,7 @@
             </div>
             <div class="modal-body px-5">
                 {% for template, _ in modal_pages %}
-                    <div id="modal-pg-{{ loop.index }}"
-                         class="{{ "d-none" if loop.index0 else "" }}">
+                    <div class="{{ "d-none" if loop.index0 else "" }}" data-page="{{ loop.index }}">
                         {% include template %}
                     </div>
                 {% endfor %}
@@ -19,7 +18,7 @@
                     <ul class="pagination m-0">
                         {% for _, name in modal_pages %}
                             <li class="page-item{{ "" if loop.index0 else " active" }}">
-                                <a class="page-link" data-page="#modal-pg-{{ loop.index }}"
+                                <a class="page-link" data-page="{{ loop.index }}"
                                    aria-current="{{ "page" if loop.index == 1 else "false" }}">
                                     {{ name }}
                                 </a>
