@@ -93,6 +93,8 @@ export class RecipesView implements IObserver<Message<Recipe[]>> {
             price.textContent = (recipe.pricePerServing / 100).toFixed(2);
         }
 
+        clone.addEventListener("click", () => this._controller.onClick(recipe));
+
         this._parent.appendChild(clone);
     }
 
