@@ -1,6 +1,7 @@
 import {IObserver} from "../../observe";
 import {ModalMessage} from "../../models/modal";
 import {Modal} from "bootstrap";
+import {PaginatedModalController} from "../../controllers/modal";
 
 export abstract class PaginatedModal<T> implements IObserver<ModalMessage<T>> {
     protected readonly _element: Element;
@@ -19,10 +20,16 @@ export abstract class ModalPage<T> implements IObserver<ModalMessage<T>> {
     protected readonly _body: Element;
     protected readonly _link: Element;
     protected readonly _page: number;
+    protected readonly _controller: PaginatedModalController<T>;
 
-    protected constructor(modal: Element, page: number) {
+    protected constructor(
+        modal: Element,
+        page: number,
+        controller: PaginatedModalController<T>
+    ) {
         this._modal = modal;
         this._page = page;
+        this._controller = controller;
 
         const body = this._modal.querySelector(
             `.modal-body *[data-page=${page}]`
@@ -42,6 +49,10 @@ export abstract class ModalPage<T> implements IObserver<ModalMessage<T>> {
             throw new TypeError(`Can't find page ${page}'s nav anchor.`);
         } else {
             this._link = link;
+            link.addEventListener(
+                "click",
+                controller.onNavigationClick.bind(controller)
+            );
         }
     }
 

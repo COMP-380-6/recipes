@@ -1,6 +1,7 @@
 import {ModalPage, PaginatedModal} from "./paginated";
 import {ModalMessage} from "../../models/modal";
 import {Recipe} from "../../models/spoonacular";
+import {PaginatedModalController} from "../../controllers/modal";
 
 export class RecipeModal extends PaginatedModal<Recipe> {
     public update(message: ModalMessage<Recipe>): void {
@@ -18,8 +19,12 @@ export class SummaryPage extends ModalPage<Recipe> {
     private readonly _summary: Element;
     private readonly _image: HTMLImageElement;
 
-    constructor(element: Element, page: number) {
-        super(element, page);
+    constructor(
+        element: Element,
+        page: number,
+        controller: PaginatedModalController<Recipe>
+    ) {
+        super(element, page, controller);
 
         const summary = this._modal.querySelector("#summary");
         if (summary === null) {
@@ -46,8 +51,12 @@ export class SummaryPage extends ModalPage<Recipe> {
 export class InstructionsPage extends ModalPage<Recipe> {
     private _list: Element;
 
-    constructor(element: Element, page: number) {
-        super(element, page);
+    constructor(
+        element: Element,
+        page: number,
+        controller: PaginatedModalController<Recipe>
+    ) {
+        super(element, page, controller);
 
         const list = this._modal.querySelector("#instructions");
         if (list === null) {
