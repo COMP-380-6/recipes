@@ -30,6 +30,12 @@ export class RecipesController {
     }
 
     public onClick(recipe: Recipe) {
+        if (recipe.id !== this._modal.data?.id) {
+            // Go to the first page if a different recipe is opened.
+            // TODO: I think ideally this should be done in the model.
+            this._modal.page = 1;
+        }
+
         this._modal.data = recipe;
     }
 }

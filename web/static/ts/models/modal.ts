@@ -9,11 +9,7 @@ export class PaginatedModalModel<T> extends BaseObservable<ModalMessage<T>> {
     private _data?: T = undefined;
     private _page: number = 1;
 
-    public get data(): T {
-        if (this._data === undefined) {
-            throw new TypeError("Cannot get data: nothing has been set yet.");
-        }
-
+    public get data(): T | undefined {
         return this._data;
     }
 
@@ -21,7 +17,11 @@ export class PaginatedModalModel<T> extends BaseObservable<ModalMessage<T>> {
         return this._page;
     }
 
-    public set data(data: T) {
+    public set data(data: T | undefined) {
+        if (data === undefined) {
+            throw new TypeError("Cannot set data to undefined.");
+        }
+
         this._data = data;
         this.notify({data: data, page: this._page});
     }
