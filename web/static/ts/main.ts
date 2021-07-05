@@ -14,14 +14,14 @@ import {Quantities} from "./models/modal";
 import {Recipe} from "./models/spoonacular";
 import {
     IngredientQuantitiesView,
-    InstructionsPage,
-    RecipeModal,
-    RequirementsPage,
-    SummaryPage,
+    RecipeInstructionsView,
+    RecipeModalView,
+    RecipeRequirementsView,
+    RecipeSummaryView,
 } from "./views/modal/recipes";
 import {RecipeModalController} from "./controllers/modal";
 import {IntegerModel, Model} from "./models/common";
-import {PaginatedModal} from "./views/modal/paginated";
+import {PaginatedModalView} from "./views/modal/paginated";
 
 const client = new Client();
 
@@ -64,19 +64,19 @@ selectionsModel.register(selectionsView);
 const recipesView = new RecipesView(recipesController, modalController);
 recipesModel.register(recipesView);
 
-const paginatedModalView = new PaginatedModal(modal, modalController);
+const paginatedModalView = new PaginatedModalView(modal, modalController);
 modalPageModel.register(paginatedModalView);
 
-const modalView = new RecipeModal(modal);
+const modalView = new RecipeModalView(modal);
 modalModel.register(modalView);
 
-const summaryView = new SummaryPage(modal);
+const summaryView = new RecipeSummaryView(modal);
 modalModel.register(summaryView);
 
-const requirementsView = new RequirementsPage(modal);
+const requirementsView = new RecipeRequirementsView(modal);
 modalModel.register(requirementsView);
 
-const instructionsView = new InstructionsPage(modal);
+const instructionsView = new RecipeInstructionsView(modal);
 modalModel.register(instructionsView);
 
 const quantitiesView = new IngredientQuantitiesView(modal, modalController);

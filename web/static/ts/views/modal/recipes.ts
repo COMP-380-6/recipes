@@ -3,7 +3,7 @@ import {Recipe} from "../../models/spoonacular";
 import {IObserver} from "../../observe";
 import {RecipeModalController} from "../../controllers/modal";
 
-export class RecipeModal implements IObserver<Recipe> {
+export class RecipeModalView implements IObserver<Recipe> {
     private _title: Element;
 
     constructor(modal: Element) {
@@ -20,7 +20,7 @@ export class RecipeModal implements IObserver<Recipe> {
     }
 }
 
-export class SummaryPage implements IObserver<Recipe> {
+export class RecipeSummaryView implements IObserver<Recipe> {
     private readonly _summary: Element;
     private readonly _image: HTMLImageElement;
 
@@ -46,7 +46,7 @@ export class SummaryPage implements IObserver<Recipe> {
     }
 }
 
-export class InstructionsPage implements IObserver<Recipe> {
+export class RecipeInstructionsView implements IObserver<Recipe> {
     private _list: Element;
 
     constructor(modal: Element) {
@@ -74,7 +74,7 @@ export class InstructionsPage implements IObserver<Recipe> {
     }
 }
 
-export class RequirementsPage implements IObserver<Recipe> {
+export class RecipeRequirementsView implements IObserver<Recipe> {
     private readonly _ingredientsTemplate: Element;
     private readonly _shoppingList: Element;
     private readonly _equipmentTemplate: Element;

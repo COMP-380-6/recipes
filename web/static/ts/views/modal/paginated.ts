@@ -1,7 +1,7 @@
 import {IObserver} from "../../observe";
 import {PaginatedModalController} from "../../controllers/modal";
 
-export class PaginatedModal implements IObserver<number> {
+export class PaginatedModalView implements IObserver<number> {
     private readonly _modal: Element;
 
     constructor(modal: Element, controller: PaginatedModalController) {
