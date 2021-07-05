@@ -43,46 +43,26 @@ const modalController = new RecipeModalController(
     quantitiesModel
 );
 
-const form = document.querySelector("#form-ingredients");
+// Elements
+const form = document.querySelector("#form-ingredients") as HTMLFormElement;
 if (form === null) {
     throw new TypeError("Cannot find the ingredients form.");
 }
-
-// Views
-const formView = new IngredientFormView(
-    form as HTMLFormElement,
-    formController
-);
-formModel.register(formView);
-
-const selectionsView = new SelectedIngredientsView(
-    form as HTMLFormElement,
-    selectionsController
-);
-selectionsModel.register(selectionsView);
-
-const searchButton = document.querySelector("#button-search");
-if (searchButton === null) {
-    throw new TypeError("Cannot find the search button.");
-}
-
-const missingToggle = document.querySelector("#check-recipe-hide");
-if (missingToggle === null) {
-    throw new TypeError("Cannot find the missing recipes toggle switch.");
-}
-
-const recipesView = new RecipesView(
-    searchButton,
-    missingToggle,
-    recipesController,
-    modalController
-);
-recipesModel.register(recipesView);
 
 const modal = document.querySelector("#recipe-modal");
 if (modal === null) {
     throw new TypeError("Cannot find the recipe modal.");
 }
+
+// Views
+const formView = new IngredientFormView(form, formController);
+formModel.register(formView);
+
+const selectionsView = new SelectedIngredientsView(form, selectionsController);
+selectionsModel.register(selectionsView);
+
+const recipesView = new RecipesView(recipesController, modalController);
+recipesModel.register(recipesView);
 
 const paginatedModalView = new PaginatedModal(modal, modalController);
 modalPageModel.register(paginatedModalView);

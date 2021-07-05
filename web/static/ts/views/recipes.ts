@@ -11,8 +11,6 @@ export class RecipesView implements IObserver<Message<Recipe[]>> {
     private readonly _parent: HTMLElement;
 
     constructor(
-        searchButton: Element,
-        missingToggle: Element,
         controller: RecipesController,
         modalController: RecipeModalController
     ) {
@@ -30,6 +28,16 @@ export class RecipesView implements IObserver<Message<Recipe[]>> {
             throw new TypeError("The recipe template doesn't have a parent.");
         } else {
             this._parent = template.parentElement;
+        }
+
+        const searchButton = document.querySelector("#button-search");
+        if (searchButton === null) {
+            throw new TypeError("Cannot find the search button.");
+        }
+
+        const missingToggle = document.querySelector("#check-recipe-hide");
+        if (missingToggle === null) {
+            throw new TypeError("Can't find the missing recipes toggle.");
         }
 
         searchButton.addEventListener("click", this._onSearch.bind(this));
