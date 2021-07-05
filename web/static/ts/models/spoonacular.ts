@@ -89,7 +89,7 @@ export interface Ingredient extends BaseIngredient {
 
 export interface ExtendedIngredient extends BaseIngredient {
     readonly nameClean: string | null;
-    readonly measure: {us: Measure; metric: Measure};
+    readonly measures: {us: Measure; metric: Measure};
 }
 
 export interface Measure {

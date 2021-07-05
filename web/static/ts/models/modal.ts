@@ -85,14 +85,14 @@ export class Quantities
 
             this._us.push({
                 id: ingredient.id,
-                amount: ingredient.measure.us.amount,
-                unit: ingredient.measure.us.unitShort,
+                amount: ingredient.measures.us.amount,
+                unit: ingredient.measures.us.unitShort,
             });
 
             this._metric.push({
                 id: ingredient.id,
-                amount: ingredient.measure.metric.amount,
-                unit: ingredient.measure.metric.unitShort,
+                amount: ingredient.measures.metric.amount,
+                unit: ingredient.measures.metric.unitShort,
             });
         }
 
