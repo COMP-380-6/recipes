@@ -4,7 +4,7 @@
  * @param html The inner HTML to place in the created element.
  * @returns The first element created by the inner HTML.
  */
-export function ce(html: string): Element {
+export function createElement(html: string): Element {
     const div = document.createElement("div");
     div.innerHTML = html;
 

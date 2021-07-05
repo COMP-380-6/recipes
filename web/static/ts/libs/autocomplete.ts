@@ -1,6 +1,6 @@
 import {CreateImmutable, MandateProps} from "../utils/type";
 import {removeUndefined} from "../utils/structure";
-import {ce, insertAfter} from "../utils/dom";
+import {createElement, insertAfter} from "../utils/dom";
 import {Dropdown} from "bootstrap";
 
 export interface Selection {
@@ -61,7 +61,7 @@ export class Autocomplete {
         field.setAttribute("data-bs-toggle", "dropdown");
         field.classList.add("dropdown-toggle");
 
-        this._dropdownMenu = ce(`<div class="dropdown-menu"></div>`);
+        this._dropdownMenu = createElement(`<div class="dropdown-menu"></div>`);
         if (this.options.dropdownClass) {
             this._dropdownMenu.classList.add(...this.options.dropdownClass);
         }
@@ -144,7 +144,7 @@ export class Autocomplete {
             label += ` ${item.value}`;
         }
 
-        return ce(`
+        return createElement(`
             <button type="button" class="dropdown-item" data-label="${item.label}"
                     data-value="${item.value}">
                 ${label}
