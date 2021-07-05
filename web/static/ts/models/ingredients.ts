@@ -54,9 +54,8 @@ export class SelectedIngredients extends AlertingObservable<SelectionsDiff> {
 
     addSelection(input: string): void {
         if (this.lastSelection === undefined) {
-            throw new TypeError(
-                "Cannot add last selection: nothing has been selected yet."
-            );
+            // Silently fail if nothing has been selected yet.
+            return;
         }
 
         if (input !== this.lastSelection.name) {
