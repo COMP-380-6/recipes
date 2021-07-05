@@ -37,6 +37,15 @@ export class RecipeModalController extends PaginatedModalController {
         if (recipe.id !== this._data.data?.id) {
             // Go to the first page if a different recipe is opened.
             this._page.int = 1;
+
+            // Reset to the first tab too. Yes, an exception is being made to
+            // let the controller update the view directly.
+            const button = document.querySelector("#req-ingr-nav-tab-1");
+            if (button !== null) {
+                (button as HTMLElement).click();
+            } else {
+                console.error("Can't find 1st button for requirements nav tab");
+            }
         }
 
         this._data.data = recipe;
