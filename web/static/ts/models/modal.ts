@@ -23,8 +23,13 @@ export class PaginatedModalModel<T> extends BaseObservable<ModalMessage<T>> {
             throw new TypeError("Cannot set data to undefined.");
         }
 
-        this._data = data;
-        this.notify({data: data, page: this._page});
+        // Don't notify if the data is the same.
+        // Since it's generic, nothing more can be done here than check if the
+        // objects are the exact same instance.
+        if (this._data !== data) {
+            this._data = data;
+            this.notify({data: data, page: this._page});
+        }
     }
 
     public set page(page: number) {
