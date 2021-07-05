@@ -28,6 +28,11 @@ export class PaginatedModalModel<T> extends BaseObservable<ModalMessage<T>> {
     }
 
     public set page(page: number) {
+        if (page === this._page) {
+            // Don't notify if the page is identical.
+            return;
+        }
+
         if (!Number.isInteger(page)) {
             throw new TypeError("Page number must be an integer.");
         }
