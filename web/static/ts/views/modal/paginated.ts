@@ -1,51 +1,17 @@
 import {IObserver} from "../../observe";
-import {ModalMessage} from "../../models/modal";
 import {PaginatedModalController} from "../../controllers/modal";
 
-export abstract class PaginatedModal<T> implements IObserver<ModalMessage<T>> {
-    protected readonly _element: Element;
+export class PaginatedModal implements IObserver<number> {
+    private readonly _modal: Element;
 
-    constructor(element: Element) {
-        this._element = element;
-    }
-
-    abstract update(message: ModalMessage<T>): void;
-}
-
-export abstract class ModalPage<T> implements IObserver<ModalMessage<T>> {
-    protected readonly _modal: Element;
-    protected readonly _body: Element;
-    protected readonly _link: Element;
-    protected readonly _page: number;
-    protected readonly _controller: PaginatedModalController<T>;
-
-    protected constructor(
-        modal: Element,
-        page: number,
-        controller: PaginatedModalController<T>
-    ) {
+    constructor(modal: Element, controller: PaginatedModalController) {
         this._modal = modal;
-        this._page = page;
-        this._controller = controller;
 
-        const body = this._modal.querySelector(
-            `.modal-body *[data-page="${page}"]`
+        const links = this._modal.querySelectorAll(
+            ".modal-footer .page-item .page-link"
         );
-        if (body === null) {
-            throw new TypeError(`Can't find page ${page}'s body.`);
-        } else {
-            this._body = body;
-        }
 
-        // Note that the selector has parents. This means parentElement
-        // shouldn't be null despite TypeScript's warnings.
-        const link = this._modal.querySelector(
-            `.modal-footer .page-item .page-link[data-page="${page}"]`
-        );
-        if (link === null) {
-            throw new TypeError(`Can't find page ${page}'s nav anchor.`);
-        } else {
-            this._link = link;
+        for (const link of links) {
             link.addEventListener(
                 "click",
                 controller.onNavigationClick.bind(controller)
@@ -53,24 +19,46 @@ export abstract class ModalPage<T> implements IObserver<ModalMessage<T>> {
         }
     }
 
-    public update(message: ModalMessage<T>): void {
-        if (message.page === this._page) {
-            this._show();
-        } else if (this._link.parentElement?.classList.contains("active")) {
-            // Only hide if it's the active element; avoids redundancy.
-            this._hide();
+    public update(page: number) {
+        this._hideActive();
+
+        const link = this._getLink(`[data-page="${page}"]`);
+        link.setAttribute("aria-current", "page");
+        link.parentElement?.classList.add("active");
+
+        this._getBody(page).classList.remove("d-none");
+    }
+
+    private _hideActive() {
+        const link = this._getLink("[aria-current=page]");
+        link.removeAttribute("aria-current");
+        link.parentElement?.classList.remove("active");
+
+        const page = link.getAttribute("data-page");
+        this._getBody(page).classList.add("d-none");
+    }
+
+    private _getBody(page: any): Element {
+        const body = this._modal.querySelector(
+            `.modal-body *[data-page="${page}"]`
+        );
+        if (body === null) {
+            throw new TypeError(`Can't find page ${page}'s body.`);
+        } else {
+            return body;
         }
     }
 
-    protected _show() {
-        this._body.classList.remove("d-none");
-        this._link.setAttribute("aria-current", "page");
-        this._link.parentElement?.classList.add("active");
-    }
-
-    protected _hide() {
-        this._body.classList.add("d-none");
-        this._link.removeAttribute("aria-current");
-        this._link.parentElement?.classList.remove("active");
+    private _getLink(selector: string): Element {
+        // Note that the selector has parents. This means parentElement
+        // shouldn't be null despite TypeScript's warnings.
+        const link = this._modal.querySelector(
+            `.modal-footer .page-item .page-link${selector}`
+        );
+        if (link === null) {
+            throw new TypeError(`Can't find active page's nav anchor.`);
+        } else {
+            return link;
+        }
     }
 }

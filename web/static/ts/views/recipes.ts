@@ -2,19 +2,22 @@ import {IObserver} from "../observe";
 import {Recipe} from "../models/spoonacular";
 import {RecipesController} from "../controllers/recipes";
 import {Message} from "../observe";
-import {Modal} from "bootstrap";
+import {RecipeModalController} from "../controllers/modal";
 
 export class RecipesView implements IObserver<Message<Recipe[]>> {
     private readonly _controller: RecipesController;
+    private readonly _modalController: RecipeModalController;
     private readonly _template: HTMLElement;
     private readonly _parent: HTMLElement;
 
     constructor(
         searchButton: Element,
         missingToggle: Element,
-        controller: RecipesController
+        controller: RecipesController,
+        modalController: RecipeModalController
     ) {
         this._controller = controller;
+        this._modalController = modalController;
 
         const template = document.getElementById("recipe-template");
         if (template === null) {
@@ -72,7 +75,7 @@ export class RecipesView implements IObserver<Message<Recipe[]>> {
         } else {
             (image as HTMLImageElement).src = recipe.image;
             image.addEventListener("click", () => {
-                this._controller.onClick(recipe);
+                this._modalController.onClick(recipe);
             });
         }
 

@@ -1,41 +1,38 @@
-import {ModalPage, PaginatedModal} from "./paginated";
-import {ModalMessage, Quantity} from "../../models/modal";
+import {Quantity} from "../../models/modal";
 import {Recipe} from "../../models/spoonacular";
-import {PaginatedModalController} from "../../controllers/modal";
 import {IObserver} from "../../observe";
-import {RecipesController} from "../../controllers/recipes";
+import {RecipeModalController} from "../../controllers/modal";
 
-export class RecipeModal extends PaginatedModal<Recipe> {
-    public update(message: ModalMessage<Recipe>): void {
-        // Easier to query it here every time than to save it as a field.
-        const title = this._element.querySelector(".modal-title");
+export class RecipeModal implements IObserver<Recipe> {
+    private _title: Element;
+
+    constructor(modal: Element) {
+        const title = modal.querySelector(".modal-title");
         if (title === null) {
-            throw new TypeError("Can't set modal title: element not found.");
+            throw new TypeError("Modal lacks a title element.");
         } else {
-            title.textContent = message.data.title;
+            this._title = title;
         }
+    }
+
+    public update(recipe: Recipe): void {
+        this._title.textContent = recipe.title;
     }
 }
 
-export class SummaryPage extends ModalPage<Recipe> {
+export class SummaryPage implements IObserver<Recipe> {
     private readonly _summary: Element;
     private readonly _image: HTMLImageElement;
 
-    constructor(
-        element: Element,
-        page: number,
-        controller: PaginatedModalController<Recipe>
-    ) {
-        super(element, page, controller);
-
-        const summary = this._modal.querySelector("#summary");
+    constructor(modal: Element) {
+        const summary = modal.querySelector("#summary");
         if (summary === null) {
             throw new TypeError("Can't find the summary element in the page.");
         } else {
             this._summary = summary;
         }
 
-        const image = this._modal.querySelector("img#summary-img");
+        const image = modal.querySelector("img#summary-img");
         if (image === null) {
             throw new TypeError("Can't find the summary image in the page.");
         } else {
@@ -43,24 +40,17 @@ export class SummaryPage extends ModalPage<Recipe> {
         }
     }
 
-    public update(message: ModalMessage<Recipe>): void {
-        super.update(message);
-        this._summary.innerHTML = message.data.summary;
-        this._image.src = message.data.image;
+    public update(recipe: Recipe): void {
+        this._summary.innerHTML = recipe.summary;
+        this._image.src = recipe.image;
     }
 }
 
-export class InstructionsPage extends ModalPage<Recipe> {
+export class InstructionsPage implements IObserver<Recipe> {
     private _list: Element;
 
-    constructor(
-        element: Element,
-        page: number,
-        controller: PaginatedModalController<Recipe>
-    ) {
-        super(element, page, controller);
-
-        const list = this._modal.querySelector("#instructions");
+    constructor(modal: Element) {
+        const list = modal.querySelector("#instructions");
         if (list === null) {
             throw new TypeError(
                 "Can't find the instructions element in the page."
@@ -70,12 +60,11 @@ export class InstructionsPage extends ModalPage<Recipe> {
         }
     }
 
-    public update(message: ModalMessage<Recipe>): void {
-        super.update(message);
+    public update(recipe: Recipe): void {
         // @ts-expect-error
         this._list.replaceChildren();
 
-        for (const instructions of message.data.analyzedInstructions) {
+        for (const instructions of recipe.analyzedInstructions) {
             for (const step of instructions.steps) {
                 const listItem = document.createElement("li");
                 listItem.textContent = step.step;
@@ -85,19 +74,13 @@ export class InstructionsPage extends ModalPage<Recipe> {
     }
 }
 
-export class RequirementsPage extends ModalPage<Recipe> {
+export class RequirementsPage implements IObserver<Recipe> {
     private readonly _ingredientsTemplate: Element;
     private readonly _shoppingList: Element;
     private readonly _equipmentTemplate: Element;
 
-    constructor(
-        element: Element,
-        page: number,
-        controller: PaginatedModalController<Recipe>
-    ) {
-        super(element, page, controller);
-
-        let template = this._modal.querySelector("#req-ingr-template");
+    constructor(modal: Element) {
+        let template = modal.querySelector("#req-ingr-template");
         if (template === null) {
             throw new TypeError(
                 "Can't find the ingredients template in the page."
@@ -106,7 +89,7 @@ export class RequirementsPage extends ModalPage<Recipe> {
             this._ingredientsTemplate = template;
         }
 
-        template = this._modal.querySelector("#req-shopping");
+        template = modal.querySelector("#req-shopping");
         if (template === null) {
             throw new TypeError(
                 "Can't find the shopping list template in the page."
@@ -115,7 +98,7 @@ export class RequirementsPage extends ModalPage<Recipe> {
             this._shoppingList = template;
         }
 
-        template = this._modal.querySelector("#req-equip-template");
+        template = modal.querySelector("#req-equip-template");
         if (template === null) {
             throw new TypeError(
                 "Can't find the equipment template in the page."
@@ -125,11 +108,10 @@ export class RequirementsPage extends ModalPage<Recipe> {
         }
     }
 
-    public update(message: ModalMessage<Recipe>): void {
-        super.update(message);
-        this._createIngredients(message.data);
-        this._createShoppingList(message.data);
-        this._createEquipment(message.data);
+    public update(recipe: Recipe): void {
+        this._createIngredients(recipe);
+        this._createShoppingList(recipe);
+        this._createEquipment(recipe);
     }
 
     _createIngredients(recipe: Recipe) {
@@ -245,9 +227,9 @@ export class RequirementsPage extends ModalPage<Recipe> {
 
 export class IngredientQuantitiesView implements IObserver<Quantity[]> {
     private readonly _modal: Element;
-    private readonly _controller: RecipesController;
+    private readonly _controller: RecipeModalController;
 
-    constructor(modal: Element, controller: RecipesController) {
+    constructor(modal: Element, controller: RecipeModalController) {
         this._modal = modal;
         this._controller = controller;
 
