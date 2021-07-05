@@ -15,5 +15,3 @@ overrides:
           - "webpack.*.js"
       rules:
           "@typescript-eslint/no-var-requires": off
-globals:
-    bootstrap: readonly
