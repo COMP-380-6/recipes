@@ -7,10 +7,10 @@ import {
 import {SelectionsDiff} from "../models/ingredients";
 import {Tooltip} from "bootstrap";
 import {AutocompleteIngredient} from "../models/spoonacular";
-import {Message} from "../observe";
+import {IMessage} from "../observe";
 
 export class IngredientFormView
-    implements IObserver<Message<AutocompleteIngredient[]>>
+    implements IObserver<IMessage<AutocompleteIngredient[]>>
 {
     private readonly _controller: IngredientFormController;
     private readonly _autocomplete: Autocomplete;
@@ -41,7 +41,7 @@ export class IngredientFormView
         form.addEventListener("submit", this._onSubmit.bind(this));
     }
 
-    public update(message: Message<AutocompleteIngredient[]>): void {
+    public update(message: IMessage<AutocompleteIngredient[]>): void {
         if (message.data) {
             this._autocomplete.data = message.data;
         }
@@ -74,7 +74,7 @@ export class IngredientFormView
 }
 
 export class SelectedIngredientsView
-    implements IObserver<Message<SelectionsDiff>>
+    implements IObserver<IMessage<SelectionsDiff>>
 {
     private readonly _controller: SelectedIngredientsController;
     private readonly _elements: Map<string, Element> = new Map();
@@ -97,7 +97,7 @@ export class SelectedIngredientsView
         form.addEventListener("reset", controller.onReset.bind(controller));
     }
 
-    public update(message: Message<SelectionsDiff>): void {
+    public update(message: IMessage<SelectionsDiff>): void {
         if (message.data) {
             for (const ingredient of message.data.deleted) {
                 this._delete(ingredient);

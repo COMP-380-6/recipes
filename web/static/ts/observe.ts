@@ -54,7 +54,9 @@ export class Message<T> implements IMessage<T> {
     }
 }
 
-export abstract class AlertingObservable<T> extends BaseObservable<Message<T>> {
+export abstract class AlertingObservable<T> extends BaseObservable<
+    IMessage<T>
+> {
     public notify(message: Partial<IMessage<T>>) {
         super.notify(new Message<T>(message));
     }
