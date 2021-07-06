@@ -1,5 +1,5 @@
 import {IObserver} from "../observe";
-import {Autocomplete, Options, Selection} from "../libs/autocomplete";
+import {Autocomplete, Selection} from "../libs/autocomplete";
 import {
     IngredientFormController,
     SelectedIngredientsController,
@@ -14,7 +14,6 @@ export class IngredientFormView
 {
     private readonly _controller: IngredientFormController;
     private readonly _autocomplete: Autocomplete;
-    private readonly _acOptions: Options;
     private readonly _input: HTMLInputElement;
 
     constructor(form: HTMLFormElement, controller: IngredientFormController) {
@@ -29,14 +28,14 @@ export class IngredientFormView
             this._input = input as HTMLInputElement;
         }
 
-        this._acOptions = {
+        const options = {
             label: "name",
             value: "image",
             threshold: 3,
             onInput: this._onInput.bind(this),
             onSelectItem: this._onSelectItem.bind(this),
         };
-        this._autocomplete = new Autocomplete(this._input, this._acOptions);
+        this._autocomplete = new Autocomplete(this._input, options);
 
         form.addEventListener("submit", this._onSubmit.bind(this));
     }
