@@ -77,6 +77,7 @@ export class SelectedIngredientsView
 {
     private readonly _controller: SelectedIngredientsController;
     private readonly _elements: Map<string, Element> = new Map();
+    private readonly _searchButton: HTMLButtonElement;
 
     private readonly _tooltipOptions = {
         html: true,
@@ -92,6 +93,14 @@ export class SelectedIngredientsView
         controller: SelectedIngredientsController
     ) {
         this._controller = controller;
+
+        // TODO: kind of out of place in this view, but it's convenient :)
+        const searchButton = document.querySelector("#button-search");
+        if (searchButton === null) {
+            throw new TypeError("Cannot find the search button.");
+        } else {
+            this._searchButton = searchButton as HTMLButtonElement;
+        }
 
         form.addEventListener("reset", controller.onReset.bind(controller));
     }
@@ -117,6 +126,8 @@ export class SelectedIngredientsView
         const element = this._createElement(ingredient.name);
         this._addTooltip(element, ingredient.image || "no.png");
         this._elements.set(ingredient.name, element);
+
+        this._searchButton.disabled = false;
     }
 
     private _delete(ingredient: AutocompleteIngredient) {
@@ -129,6 +140,10 @@ export class SelectedIngredientsView
         Tooltip.getInstance(element)?.dispose();
         element.remove();
         this._elements.delete(ingredient.name);
+
+        if (this._elements.size === 0) {
+            this._searchButton.disabled = true;
+        }
     }
 
     private _createElement(name: string) {
