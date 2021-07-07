@@ -3,6 +3,14 @@
 
 # Make exceptions for what's needed
 !web
+!package.json
+!package-lock.json
 !poetry.lock
 !pyproject.toml
+!tsconfig.json
+!webpack*.js
 !LICENSE
+
+# Exclude webpack and tsc output
+web/static/dist
+web/static/js

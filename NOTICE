@@ -1,10 +1,7 @@
 MIT License
 
-web/static/autocomplete.js
+web/static/ts/libs/autocomplete.ts
 gch1p @GitHub [no copyright notice provided]
-
-web/static/levenshtein.js
-Copyright (c) 2017 Gustaf Andersson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

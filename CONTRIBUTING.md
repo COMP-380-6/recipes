@@ -2,13 +2,19 @@
 
 ## Initial Setup
 
-As prerequisites, Python 3.9 and [poetry] are required. Once those are installed, `cd` into the project's root directory and install the project's dependencies:
+As prerequisites, Python 3.9, npm, and [poetry] are required. Once those are installed, `cd` into the project's root directory and install the project's Python dependencies:
 
 ```bash
 poetry install
 ```
 
-Next, install the pre-commit hook to ensure the linters will run upon a commit:
+Next, install the JavaScript dependencies:
+
+```bash
+npm ci
+```
+
+Finally, install the pre-commit hook to ensure the linters will run upon a commit:
 
 ```bash
 poetry run pre-commit install
@@ -47,6 +53,14 @@ set FLASK_APP=web
 set FLASK_ENV=development
 
 poetry run flask run
+```
+
+### Building the webpack Bundle
+
+webpack is used to bundle all the JavaScript and TypeScript code, including dependencies from npm, into a single JavaScript file called a "bundle". The bundle has to be rebuilt before testing out new JS/TS changes. To rebuild it, do the following:
+
+```bash
+npm run build
 ```
 
 ## Running Tests

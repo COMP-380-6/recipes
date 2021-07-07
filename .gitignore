@@ -64,4 +64,11 @@ instance/
 # Mac OS .DS_Store, which is a file that stores custom attributes of its containing folder
 .DS_Store
 
+# JavaScript
+node_modules/
+web/static/js/
+web/static/dist/
+*.tsbuildinfo
+*.d.ts
+
 recipe_data.json
