@@ -10,6 +10,9 @@
         "buildprod": "webpack --config webpack.prod.js"
     },
     "devDependencies": {
+        "@types/bootstrap": "^5.0.16",
+        "@types/bootstrap-select": "^1.13.1",
+        "@types/js-levenshtein": "^1.1.0",
         "@types/lodash.isequal": "^4.5.5",
         "css-loader": "^5.2.6",
         "mini-css-extract-plugin": "^2.0.0",
@@ -20,9 +23,6 @@
         "webpack-merge": "^5.8.0"
     },
     "dependencies": {
-        "@types/bootstrap": "^5.0.16",
-        "@types/bootstrap-select": "^1.13.1",
-        "@types/js-levenshtein": "^1.1.0",
         "bootstrap": "^5.0.2",
         "bootstrap-select": "^1.14.0-beta2",
         "dayjs": "^1.10.5",
