@@ -16,7 +16,9 @@ export class RecipesController {
         type: string,
         maxReadyTime: string
     ): Promise<void> {
-        const ingred = Array.from(this._ingredients.ingredients).join(",");
+        const ingred = Array.from(this._ingredients.ingredients)
+            .map((i) => i.name)
+            .join(",");
         const cuisine = cuisines.join(",");
         await this._recipes.update(ingred, sort, cuisine, type, maxReadyTime);
     }
