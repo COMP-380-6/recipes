@@ -10,6 +10,7 @@
         "buildprod": "webpack --config webpack.prod.js"
     },
     "devDependencies": {
+        "@types/lodash.isequal": "^4.5.5",
         "css-loader": "^5.2.6",
         "mini-css-extract-plugin": "^2.0.0",
         "ts-loader": "^9.2.3",
@@ -26,6 +27,7 @@
         "bootstrap-select": "^1.14.0-beta2",
         "dayjs": "^1.10.5",
         "js-levenshtein": "^1.1.6",
+        "lodash.isequal": "^4.5.0",
         "tslib": "^2.3.0"
     }
 }
