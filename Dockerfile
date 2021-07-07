@@ -1,4 +1,16 @@
-FROM python:3.9-slim-buster
+FROM node:16-buster-slim as webpack
+
+WORKDIR /recipes
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY tsconfig.json webpack*.js ./
+COPY web/static/ ./web/static/
+
+RUN npm run buildprod
+
+FROM python:3.9-slim-buster as final
 
 ENV PIP_NO_CACHE_DIR=false \
     POETRY_VIRTUALENVS_CREATE=false
@@ -14,4 +26,5 @@ COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-dev
 
+COPY --from=webpack /recipes/web/static/dist/* ./web/static/dist/
 COPY . .
