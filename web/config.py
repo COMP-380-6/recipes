@@ -1,3 +1,5 @@
-CDN_DOMAIN = "example.com"
+import os
+
+CDN_DOMAIN = os.getenv("CDN_DOMAIN", None)
 RATELIMIT_HEADERS_ENABLED = True
 RATELIMIT_HEADER_RETRY_AFTER_VALUE = "delta-seconds"
