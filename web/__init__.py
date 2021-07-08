@@ -25,6 +25,8 @@ csp = (
     .connect_src("'self'")
     .form_action("'self'")
     .frame_ancestors("'self'")
+    .style_src("'self'")
+    .script_src("'self'", "kit.fontawesome.com")
     .img_src("'self'", "spoonacular.com")
 )
 secure_headers = secure.Secure(csp=csp, permissions=secure.PermissionsPolicy())
