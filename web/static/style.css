@@ -79,10 +79,12 @@ here by 4 rather than by 2.
 /* Set parent to relative to enabled the use of absolute positioning. */
 .text-overlay-container {
     position: relative;
+    text-align: center; /* Ensure the image is centered. */
 }
 
 .text-overlay {
-    z-index: -1; /* Hide it by default. */
+    z-index: 1;
+    visibility: hidden; /* Hide it by default. */
     user-select: none; /* Disable text selection since the element behind may be clickable */
     overflow: hidden;
     pointer-events: none;
@@ -92,13 +94,17 @@ here by 4 rather than by 2.
     width: 100%;
     height: 100%;
 
-    /* Darken the background to make the text stand out. */
-    background-color: rgba(0, 0, 0, 0.4);
     color: white;
 }
 
+/* Display the text on hover. */
 .text-overlay-container:hover > .text-overlay {
-    z-index: 1; /* Display it on hover. */
+    visibility: visible;
+}
+
+/* Darken the background to make the text stand out. */
+.text-overlay-container:hover > img {
+    filter: brightness(0.6) contrast(1.1);
 }
 
 .recipe-img,
