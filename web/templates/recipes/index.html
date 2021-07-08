@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block head %}
+    <title>Pantry Pal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/main.css') }}"/>
 {% endblock %}
 
 {% block content %}
     {% include 'recipes/recipe_modal.html' %}
     <div class="py-5 text-center">
-        <h2>Search for Recipes</h2>
+        <h2>Pantry Pal</h2>
         <p class="lead">
             Enter ingredients below, then press search to find recipes containing those ingredients!
         </p>
