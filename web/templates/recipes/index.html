@@ -36,7 +36,7 @@
     <div class="row pb-3">
         <div class="col text-center">
             <div class="btn-group dropdown" role="group">
-                <button id="button-search" class="btn btn-lg btn-primary px-5" type="button"
+                <button id="button-search" class="btn btn-lg btn-primary px-sm-5" type="button"
                         disabled>
                     <i class="fas fa-search px-1" aria-hidden="true"></i>
                     Search for Recipes
@@ -62,27 +62,29 @@
             </div>
         </div>
     </div>
-    <div class="row row-cols-4 gx-5 gy-4 pb-5 justify-content-start">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 gx-5 gy-4 pb-5 justify-content-start">
         <div id="recipe-template" class="col recipe">
-            <div class="text-overlay-container">
-                <div class="text-overlay p-2">
-                    <h3 class="text-center recipe-name"></h3>
+            <div>
+                <div class="text-overlay-container">
+                    <div class="text-overlay p-2">
+                        <h3 class="text-center recipe-name"></h3>
+                    </div>
+                    <img class="img-fluid recipe-img" src="" data-bs-toggle="modal"
+                         data-bs-target="#recipe-modal">
                 </div>
-                <img class="img-fluid recipe-img" src="" data-bs-toggle="modal"
-                     data-bs-target="#recipe-modal">
-            </div>
-            <div class="row rows-cols-3 gx-2 mt-2">
-                <div class="col">
-                    <i class="fas fa-dollar-sign" aria-hidden="true"></i>
-                    <span class="recipe-price" title="Price per serving (USD)"></span>
-                </div>
-                <div class="col">
-                    <i class="fas fa-clock" aria-hidden="true"></i>
-                    <span class="recipe-time" title="Minutes until ready"></span>
-                </div>
-                <div class="col">
-                    <i class="fas fa-heartbeat" aria-hidden="true"></i>
-                    <span class="recipe-healthiness" title="Healthiness score"></span>
+                <div class="row row-cols-auto justify-content-between gx-2 mt-2">
+                    <div>
+                        <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+                        <span class="recipe-price" title="Price per serving (USD)"></span>
+                    </div>
+                    <div>
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <span class="recipe-time" title="Minutes until ready"></span>
+                    </div>
+                    <div>
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                        <span class="recipe-healthiness" title="Healthiness score"></span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,12 +1,12 @@
 <div id="recipe-modal" class="modal fade" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
-            <div class="modal-body px-5">
+            <div class="modal-body px-4 px-sm-5">
                 {% for template, _ in modal_pages %}
                     <div class="{{ "d-none" if loop.index0 else "" }}" data-page="{{ loop.index }}">
                         {% include template %}

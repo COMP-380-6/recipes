@@ -1,57 +1,55 @@
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col">
-            <h3>Ingredients</h3>
-        </div>
-        <div id="radio-units" class="col-auto btn-group btn-group-sm" role="group"
-             aria-label="Ingredient units">
-            <input type="radio" class="btn-check" name="units" id="radio-units-metric"
-                   data-unit="metric" autocomplete="off">
-            <label class="btn btn-outline-primary" for="radio-units-metric">Metric</label>
+<div class="row align-items-center">
+    <div class="col">
+        <h3>Ingredients</h3>
+    </div>
+    <div id="radio-units" class="col-auto btn-group btn-group-sm" role="group"
+         aria-label="Ingredient units">
+        <input type="radio" class="btn-check" name="units" id="radio-units-metric"
+               data-unit="metric" autocomplete="off">
+        <label class="btn btn-outline-primary" for="radio-units-metric">Metric</label>
 
-            <input type="radio" class="btn-check" name="units" id="radio-units-us"
-                   data-unit="us" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="radio-units-us">US</label>
-        </div>
+        <input type="radio" class="btn-check" name="units" id="radio-units-us"
+               data-unit="us" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="radio-units-us">US</label>
     </div>
-    <div class="row my-3">
-        <nav class="col">
-            <div class="col nav nav-tabs" role="tablist">
-                <button id="req-ingr-nav-tab-1" class="nav-link active" data-bs-toggle="tab"
-                        data-bs-target="#req-ingr-nav-1" type="button" role="tab"
-                        aria-controls="req-ingr-nav-1" aria-selected="true">
-                    All
-                </button>
-                <button id="req-ingr-nav-tab-2" class="nav-link" data-bs-toggle="tab"
-                        data-bs-target="#req-ingr-nav-2" type="button" role="tab"
-                        aria-controls="req-ingr-nav-2">
-                    Shopping List
-                </button>
+</div>
+<div class="row my-3">
+    <nav class="col">
+        <div class="col nav nav-tabs" role="tablist">
+            <button id="req-ingr-nav-tab-1" class="nav-link active" data-bs-toggle="tab"
+                    data-bs-target="#req-ingr-nav-1" type="button" role="tab"
+                    aria-controls="req-ingr-nav-1" aria-selected="true">
+                All
+            </button>
+            <button id="req-ingr-nav-tab-2" class="nav-link" data-bs-toggle="tab"
+                    data-bs-target="#req-ingr-nav-2" type="button" role="tab"
+                    aria-controls="req-ingr-nav-2">
+                Shopping List
+            </button>
+        </div>
+    </nav>
+</div>
+<div class="tab-content mb-4">
+    <div class="tab-pane fade show active" id="req-ingr-nav-1" role="tabpanel"
+         aria-labelledby="req-ingr-nav-tab-1">
+        <div class="row row-cols-2 row-cols-xs-3 row-cols-sm-4 row-cols-lg-6 justify-content-start g-3">
+            <div id="req-ingr-template" class="req-ingr col text-center">
+                <div class="quantity text-truncate"></div>
+                <img class="img-fluid my-2" src="">
+                <div class="name text-truncate"></div>
             </div>
-        </nav>
-    </div>
-    <div class="tab-content mb-4">
-        <div class="tab-pane fade show active" id="req-ingr-nav-1" role="tabpanel"
-             aria-labelledby="req-ingr-nav-tab-1">
-            <div class="row row-cols-6 justify-content-start g-3">
-                <div id="req-ingr-template" class="req-ingr col text-center">
-                    <div class="quantity text-truncate"></div>
-                    <img class="img-fluid my-2" src="">
-                    <div class="name text-truncate"></div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="req-ingr-nav-2" role="tabpanel"
-             aria-labelledby="req-ingr-nav-tab-2">
-            <ol id="req-shopping"></ol>
         </div>
     </div>
-    <h3>Equipment</h3>
-    <hr>
-    <div class="row row-cols-6 justify-content-start g-3 mb-4">
-        <div id="req-equip-template" class="req-equip col text-center">
-            <img class="img-fluid my-2" src="">
-            <div class="name text-truncate"></div>
-        </div>
+    <div class="tab-pane fade" id="req-ingr-nav-2" role="tabpanel"
+         aria-labelledby="req-ingr-nav-tab-2">
+        <ol id="req-shopping"></ol>
+    </div>
+</div>
+<h3>Equipment</h3>
+<hr>
+<div class="row row-cols-2 row-cols-xs-3 row-cols-sm-4 row-cols-lg-6 justify-content-start g-3 mb-4">
+    <div id="req-equip-template" class="req-equip col text-center">
+        <img class="img-fluid my-2" src="">
+        <div class="name text-truncate"></div>
     </div>
 </div>
