@@ -1,4 +1,5 @@
 import "./bootstrap";
+import "./fontawesome";
 import "../style.css";
 import {Client} from "./api";
 import {IngredientForm, SelectedIngredients} from "./models/ingredients";

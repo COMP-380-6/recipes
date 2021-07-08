@@ -10,6 +10,8 @@
         "buildprod": "webpack --config webpack.prod.js"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
         "@types/bootstrap": "^5.0.16",
         "@types/bootstrap-select": "^1.13.1",
         "@types/js-levenshtein": "^1.1.0",

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <script src="https://kit.fontawesome.com/b1aae60ff6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/main.css') }}"/>
 {% endblock %}
 
@@ -38,8 +37,8 @@
             <div class="btn-group dropdown" role="group">
                 <button id="button-search" class="btn btn-lg btn-primary px-sm-5" type="button"
                         disabled>
-                    <i class="fas fa-search px-1" aria-hidden="true"></i>
-                    Search for Recipes
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="ps-1">Search for Recipes</span>
                 </button>
                 <button class="btn btn-lg btn-outline-secondary dropdown-toggle dropdown-toggle-split"
                         type="button" data-bs-toggle="dropdown" data-bs-reference="parent"
