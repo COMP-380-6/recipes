@@ -23,6 +23,7 @@ export class RecipeModalView implements IObserver<Recipe> {
 export class RecipeSummaryView implements IObserver<Recipe> {
     private readonly _summary: Element;
     private readonly _image: HTMLImageElement;
+    private readonly _credits: HTMLAnchorElement;
 
     constructor(modal: Element) {
         const summary = modal.querySelector("#summary");
@@ -32,17 +33,27 @@ export class RecipeSummaryView implements IObserver<Recipe> {
             this._summary = summary;
         }
 
-        const image = modal.querySelector("img#summary-img");
+        const image = modal.querySelector("#summary-fig img");
         if (image === null) {
             throw new TypeError("Can't find the summary image in the page.");
         } else {
             this._image = image as HTMLImageElement;
+        }
+
+        const credits = modal.querySelector("a#summary-fig-credits");
+        if (credits === null) {
+            throw new TypeError("Can't find the summary credits in the page.");
+        } else {
+            this._credits = credits as HTMLAnchorElement;
         }
     }
 
     public update(recipe: Recipe): void {
         this._summary.innerHTML = recipe.summary;
         this._image.src = recipe.image;
+        this._image.alt = recipe.title;
+        this._credits.href = recipe.sourceUrl;
+        this._credits.textContent = recipe.sourceName;
     }
 }
 

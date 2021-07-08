@@ -111,3 +111,7 @@ here by 4 rather than by 2.
     height: 70px;
     object-fit: contain;
 }
+
+#summary-fig {
+    font-size: 0.75rem;
+}
