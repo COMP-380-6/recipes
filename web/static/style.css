@@ -69,11 +69,18 @@ here by 4 rather than by 2.
 #recipe-template,
 #req-ingr-template,
 #req-equip-template {
-    display: none;
+    display: none !important;
 }
 
 .recipe {
     font-size: 0.95rem;
+
+    /*
+    Ensure the width of the stats matches the width of the image, even when the image doesn't
+    take up the entire available width (due to maintaining its aspect ratio).
+    */
+    display: flex;
+    justify-content: center;
 }
 
 /* Set parent to relative to enabled the use of absolute positioning. */
