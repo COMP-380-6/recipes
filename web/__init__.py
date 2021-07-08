@@ -58,7 +58,7 @@ def create_app():
     app.add_url_rule("/", endpoint="index")
 
     # Call set_secure_headers for all requests from all blueprints.
-    app.after_request_funcs = {None: [set_secure_headers]}
+    app.after_request_funcs.setdefault(None, []).append(set_secure_headers)
 
     return app
 
