@@ -100,6 +100,7 @@ export class SelectedIngredientsView
             throw new TypeError("Cannot find the search button.");
         } else {
             this._searchButton = searchButton as HTMLButtonElement;
+            this._searchButton.disabled = true;
         }
 
         form.addEventListener("reset", controller.onReset.bind(controller));
