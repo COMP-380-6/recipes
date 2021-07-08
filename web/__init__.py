@@ -2,6 +2,7 @@ import mimetypes
 import os
 import warnings
 
+import secure
 from flask import Flask
 from flask_cdn import CDN
 from whitenoise import WhiteNoise
@@ -16,6 +17,17 @@ except ImportError:
 
 cdn = CDN()
 mimetypes.add_type("application/javascript", ".js")  # Ensure JS modules use the right mimetype.
+
+csp = (
+    secure.ContentSecurityPolicy()
+    .default_src("'none'")
+    .base_uri("'self'")
+    .connect_src("'self'")
+    .form_action("'self'")
+    .frame_ancestors("'self'")
+    .img_src("'self'", "spoonacular.com")
+)
+secure_headers = secure.Secure(csp=csp, permissions=secure.PermissionsPolicy())
 
 
 def create_app():
@@ -45,4 +57,12 @@ def create_app():
     app.register_blueprint(recipes.bp)
     app.add_url_rule("/", endpoint="index")
 
+    # Call set_secure_headers for all requests from all blueprints.
+    app.after_request_funcs = {None: [set_secure_headers]}
+
     return app
+
+
+def set_secure_headers(response):
+    secure_headers.framework.flask(response)
+    return response
