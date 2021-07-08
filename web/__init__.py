@@ -18,6 +18,8 @@ except ImportError:
 cdn = CDN()
 mimetypes.add_type("application/javascript", ".js")  # Ensure JS modules use the right mimetype.
 
+# Bootstrap inlines SVGs, so data: has to be allowed or the images have to be manually extracted
+# and replaced with URLs to files. See https://github.com/twbs/bootstrap/issues/25394
 csp = (
     secure.ContentSecurityPolicy()
     .default_src("'none'")
@@ -27,7 +29,7 @@ csp = (
     .frame_ancestors("'self'")
     .style_src("'self'")
     .script_src("'self'")
-    .img_src("'self'", "spoonacular.com")
+    .img_src("'self'", "spoonacular.com", "data:")
 )
 secure_headers = secure.Secure(csp=csp, permissions=secure.PermissionsPolicy())
 
