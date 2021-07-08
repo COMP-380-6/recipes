@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
-            <div class="modal-body px-5">
+            <div class="modal-body px-4 px-sm-5">
                 {% for template, _ in modal_pages %}
                     <div class="{{ "d-none" if loop.index0 else "" }}" data-page="{{ loop.index }}">
                         {% include template %}
