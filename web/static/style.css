@@ -111,3 +111,12 @@ here by 4 rather than by 2.
     height: 70px;
     object-fit: contain;
 }
+
+.alert {
+    visibility: hidden;
+    display: inline-block;
+}
+
+#errorAlertButton {
+    visibility: hidden;
+}
