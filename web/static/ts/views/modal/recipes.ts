@@ -240,7 +240,7 @@ export class RecipeRequirementsView implements IObserver<Recipe> {
         }
 
         const imageName = data.image || "no.png";
-        image.src = `https://spoonacular.com/cdn/${type}_100x100/${imageName}`;
+        image.src = `https://spoonacular.com/cdn/${type}_250x250/${imageName}`;
         image.title = data.name;
 
         // There were already null checks for this.
