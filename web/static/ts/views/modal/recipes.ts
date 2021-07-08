@@ -59,6 +59,7 @@ export class RecipeSummaryView implements IObserver<Recipe> {
 
 export class RecipeInstructionsView implements IObserver<Recipe> {
     private _list: Element;
+    private _credits: HTMLAnchorElement;
 
     constructor(modal: Element) {
         const list = modal.querySelector("#instructions");
@@ -68,6 +69,15 @@ export class RecipeInstructionsView implements IObserver<Recipe> {
             );
         } else {
             this._list = list;
+        }
+
+        const credits = modal.querySelector("a#instructions-credits");
+        if (credits === null) {
+            throw new TypeError(
+                "Can't find the instructions credits element in the page."
+            );
+        } else {
+            this._credits = credits as HTMLAnchorElement;
         }
     }
 
@@ -82,6 +92,9 @@ export class RecipeInstructionsView implements IObserver<Recipe> {
                 this._list.appendChild(listItem);
             }
         }
+
+        this._credits.href = recipe.sourceUrl;
+        this._credits.textContent = recipe.sourceName;
     }
 }
 
