@@ -126,3 +126,14 @@ here by 4 rather than by 2.
 #summary-fig {
     font-size: 0.75rem;
 }
+
+/*
+At the lg threshold, it goes from a max-width of 800 to 500, which is a big jump.
+Fill in the gap by using 75% max-width until the md threshold is reached,
+which would make the modal full screen.
+*/
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .modal-lg.modal-fullscreen-md-down {
+        max-width: 75%;
+    }
+}
