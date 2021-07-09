@@ -13,6 +13,11 @@
             Enter ingredients below, then press search to find recipes containing those ingredients!
         </p>
     </div>
+    <center> <!-- Error Alert -->
+        <div id="errorAlert" class="alert alert-danger center-block alert-dismissible fade show" role="alert">
+            <button id="errorAlertButton" type="button" class="btn-close alert" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </center>
     <div class="row justify-content-center pb-3">
         <form id="form-ingredients" class="input-group input-group-lg" autocomplete="off">
             <input id="ingredient-input" class="form-control" type="search"
@@ -27,6 +32,7 @@
             </button>
         </form>
     </div>
+
     <div id="ingredients" class="row gy-2 pb-5">
         <div id="ingredient-template" class="ingredient btn-group bg-light border rounded-pill">
             <span></span>
