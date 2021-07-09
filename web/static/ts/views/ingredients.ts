@@ -8,6 +8,7 @@ import {SelectionsDiff} from "../models/ingredients";
 import {Tooltip} from "bootstrap";
 import {AutocompleteIngredient} from "../models/spoonacular";
 import {IMessage} from "../observe";
+import {alertBox} from "../utils/dom";
 
 export class IngredientFormView
     implements IObserver<IMessage<AutocompleteIngredient[]>>
@@ -46,8 +47,7 @@ export class IngredientFormView
         }
 
         for (const alert of message.alerts) {
-            // TODO: display alerts.
-            console.error(alert.message);
+            alertBox(alert);
         }
     }
 
@@ -118,8 +118,7 @@ export class SelectedIngredientsView
         }
 
         for (const alert of message.alerts) {
-            // TODO: display alerts.
-            console.error(alert.message);
+            alertBox(alert);
         }
     }
 

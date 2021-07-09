@@ -29,3 +29,28 @@ export function insertAfter(elem: Element, refElem: Element): Element {
 
     return refElem.parentElement.insertBefore(elem, refElem.nextElementSibling);
 }
+
+/**
+ * @param alert The alert caused by the User/System.
+ */
+export function alertBox(alert: alertMessage) {
+    const error = document.querySelector("#errorAlert");
+    const errorBtn = document.querySelector("#errorAlertButton");
+    if (alert === null) {
+        throw new TypeError("Can't display alert: alert element not found");
+    }
+    if (alert.severity == 0) {
+        document.getElementById("errorAlert").classList.remove("alert-danger");
+        document.getElementById("errorAlert").classList.add("alert-warning");
+    } else {
+        document.getElementById("errorAlert").classList.add("alert-danger");
+    }
+    errorBtn.style.visibility = "revert";
+    error.style.visibility = "revert";
+    error.childNodes[0].nodeValue = alert.message;
+    console.error(alert.message);
+    errorBtn.addEventListener("click", updateError);
+    function updateError() {
+        error.style.visibility = "hidden";
+    }
+}
