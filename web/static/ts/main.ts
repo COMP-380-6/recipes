@@ -1,6 +1,7 @@
 import "./bootstrap";
 import "./fontawesome";
 import "../style.css";
+import "./utils/polyfills";
 import {Client} from "./api";
 import {IngredientForm, SelectedIngredients} from "./models/ingredients";
 import {
