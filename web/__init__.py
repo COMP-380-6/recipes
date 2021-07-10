@@ -28,10 +28,9 @@ csp = (
     .form_action("'self'")
     .frame_ancestors("'self'")
     .style_src("'self'")
-    .script_src("'self'")
     .img_src("'self'", "spoonacular.com", "data:")
 )
-secure_headers = secure.Secure(csp=csp, permissions=secure.PermissionsPolicy())
+secure_headers = secure.Secure(permissions=secure.PermissionsPolicy())
 
 
 def create_app():
@@ -46,6 +45,10 @@ def create_app():
 
     if app.config.get("DEBUG"):
         app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+        # Webpack uses eval in dev mode.
+        csp.script_src("'self'", "'unsafe-eval'")
+    else:
+        csp.script_src("'self'")
 
     # Serving through CDN is auto-disabled when in debug mode.
     app.wsgi_app = WhiteNoise(app.wsgi_app, root="web/static/", prefix="static/")
@@ -62,6 +65,7 @@ def create_app():
     app.add_url_rule("/", endpoint="index")
 
     # Call set_secure_headers for all requests from all blueprints.
+    secure_headers.csp = csp
     app.after_request_funcs.setdefault(None, []).append(set_secure_headers)
 
     return app
