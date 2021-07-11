@@ -38,16 +38,18 @@ export function insertAfter(elem: Element, refElem: Element): Element {
 export function alertBox(alert: Alert) {
     const errorBtn = document.querySelector("#error-alert-button");
     const error = document.querySelector("#error-alert");
-    const errorText = document.getElementById("error-text");
+    const errorText = document.querySelector("#error-text");
+
     if (error === null) {
         throw new TypeError("Can't display alert: alert element not found");
     }
     if (errorBtn === null) {
-        throw new TypeError("Can't display button: button element not found");
+        throw new TypeError("Can't display alert: button element not found");
     }
     if (errorText === null) {
-        throw new TypeError("Can't display text: text element not found");
+        throw new TypeError("Can't display alert: text element not found");
     }
+
     if (alert.severity === Severity.WARNING) {
         error.classList.remove("alert-danger");
         error.classList.add("alert-warning");
