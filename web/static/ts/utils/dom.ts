@@ -52,15 +52,12 @@ export function displayAlert(alert: Alert) {
         throw new TypeError("Can't display alert: unsupported severity");
     }
 
-    const element = document.createElement("div");
-    element.innerHTML = `
+    // TODO: display multiple alerts simultaneously?
+    container.innerHTML = `
         <div id="alert" class="alert ${alertClass} alert-dismissible fade show" role="alert">
             <span>${alert.message}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             </button>
         </div>
     `;
-
-    // @ts-expect-error
-    container.replaceChildren(element);
 }
