@@ -7,15 +7,16 @@
 
 {% block content %}
     {% include 'recipes/recipe_modal.html' %}
-    <div class="py-5 text-center">
+    <div class="pt-5 text-center">
         <h2>Pantry Pal</h2>
         <p class="lead">
             Enter ingredients below, then press search to find recipes containing those ingredients!
         </p>
     </div>
     <center> <!-- Error Alert -->
-        <div id="errorAlert" class="alert alert-danger center-block alert-dismissible fade show" role="alert">
-            <button id="errorAlertButton" type="button" class="btn-close alert" data-dismiss="alert" aria-label="Close"></button>
+        <div id="error-alert" class="alert alert-danger center-block alert-dismissible fade show" role="alert">
+            <strong id="error-text">A selection must be made from autocompletion.</strong>
+            <button id="error-alert-button" type="button" class="btn-close alert" data-dismiss="alert" aria-label="Close"></button>
         </div>
     </center>
     <div class="row justify-content-center pb-3">
