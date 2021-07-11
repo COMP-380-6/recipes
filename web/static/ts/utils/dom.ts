@@ -38,16 +38,17 @@ export function insertAfter(elem: Element, refElem: Element): Element {
  * @param alert The alert to display.
  */
 export function displayAlert(alert: Alert) {
-    const errorBtn = document.querySelector("#error-alert-button");
-    const error = document.querySelector("#error-alert");
-    const errorText = document.querySelector("#error-text");
-
+    const error = document.querySelector("#alert");
     if (error === null) {
         throw new TypeError("Can't display alert: alert element not found");
     }
-    if (errorBtn === null) {
+
+    const button = error.querySelector(".btn-close");
+    if (button === null) {
         throw new TypeError("Can't display alert: button element not found");
     }
+
+    const errorText = error.querySelector(".alert-message");
     if (errorText === null) {
         throw new TypeError("Can't display alert: text element not found");
     }
@@ -66,7 +67,7 @@ export function displayAlert(alert: Alert) {
     (error as HTMLElement).style.visibility = "visible";
 
     errorText.textContent = alert.message;
-    errorBtn.addEventListener(
+    button.addEventListener(
         "click",
         () => ((error as HTMLElement).style.visibility = "hidden")
     );

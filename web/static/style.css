@@ -145,12 +145,12 @@ which would make the modal full screen.
     }
 }
 
-#error-alert {
+#alert {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
 
-#error-alert .btn-close {
+#alert .btn-close {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
 }
