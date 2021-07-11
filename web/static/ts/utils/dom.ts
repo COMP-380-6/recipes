@@ -60,8 +60,7 @@ export function displayAlert(alert: Alert) {
         error.classList.remove("alert-danger");
         error.classList.add("alert-danger");
     } else {
-        error.classList.remove("alert-danger");
-        error.classList.add("alert-info");
+        throw new TypeError("Can't display alert: unsupported severity");
     }
 
     (error as HTMLElement).style.visibility = "visible";
