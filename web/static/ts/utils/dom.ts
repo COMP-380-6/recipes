@@ -1,3 +1,5 @@
+import {Alert} from "../alerts";
+import {Severity} from "../alerts";
 /**
  * Create a div element containing the given inner HTML.
  *
@@ -33,24 +35,36 @@ export function insertAfter(elem: Element, refElem: Element): Element {
 /**
  * @param alert The alert caused by the User/System.
  */
-export function alertBox(alert: alertMessage) {
-    const error = document.querySelector("#errorAlert");
-    const errorBtn = document.querySelector("#errorAlertButton");
-    if (alert === null) {
+export function alertBox(alert: Alert) {
+    const errorBtn = document.querySelector("#error-alert-button");
+    const error = document.querySelector("#error-alert");
+    const errorText = document.getElementById("error-text");
+    if (error === null) {
         throw new TypeError("Can't display alert: alert element not found");
     }
-    if (alert.severity == 0) {
-        document.getElementById("errorAlert").classList.remove("alert-danger");
-        document.getElementById("errorAlert").classList.add("alert-warning");
+    if (errorBtn === null) {
+        throw new TypeError("Can't display button: button element not found");
+    }
+    if (errorText === null) {
+        throw new TypeError("Can't display text: text element not found");
+    }
+    if (alert.severity === Severity.WARNING) {
+        error.classList.remove("alert-danger");
+        error.classList.add("alert-warning");
+    } else if (alert.severity === Severity.ERROR) {
+        error.classList.remove("alert-danger");
+        error.classList.add("alert-danger");
     } else {
-        document.getElementById("errorAlert").classList.add("alert-danger");
+        error.classList.remove("alert-danger");
+        error.classList.add("alert-info");
     }
     errorBtn.style.visibility = "revert";
     error.style.visibility = "revert";
-    error.childNodes[0].nodeValue = alert.message;
+    console.log(errorText.innerHTML);
+    errorText.innerHTML = alert.message;
     console.error(alert.message);
-    errorBtn.addEventListener("click", updateError);
-    function updateError() {
-        error.style.visibility = "hidden";
-    }
+    errorBtn.addEventListener(
+        "click",
+        () => (error.style.visibility = "hidden")
+    );
 }
