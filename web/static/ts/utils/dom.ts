@@ -60,13 +60,13 @@ export function alertBox(alert: Alert) {
         error.classList.remove("alert-danger");
         error.classList.add("alert-info");
     }
-    errorBtn.style.visibility = "revert";
-    error.style.visibility = "revert";
-    console.log(errorText.innerHTML);
-    errorText.innerHTML = alert.message;
-    console.error(alert.message);
+
+    (errorBtn as HTMLElement).style.visibility = "revert";
+    (error as HTMLElement).style.visibility = "revert";
+
+    errorText.textContent = alert.message;
     errorBtn.addEventListener(
         "click",
-        () => (error.style.visibility = "hidden")
+        () => ((error as HTMLElement).style.visibility = "hidden")
     );
 }
