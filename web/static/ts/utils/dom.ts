@@ -1,5 +1,5 @@
-import {Alert} from "../alerts";
-import {Severity} from "../alerts";
+import {Alert, Severity} from "../alerts";
+
 /**
  * Create a div element containing the given inner HTML.
  *
@@ -33,9 +33,11 @@ export function insertAfter(elem: Element, refElem: Element): Element {
 }
 
 /**
- * @param alert The alert caused by the User/System.
+ * Display an alert.
+ *
+ * @param alert The alert to display.
  */
-export function alertBox(alert: Alert) {
+export function displayAlert(alert: Alert) {
     const errorBtn = document.querySelector("#error-alert-button");
     const error = document.querySelector("#error-alert");
     const errorText = document.querySelector("#error-text");

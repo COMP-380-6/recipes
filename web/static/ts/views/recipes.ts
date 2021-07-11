@@ -3,7 +3,7 @@ import {Recipe} from "../models/spoonacular";
 import {RecipesController} from "../controllers/recipes";
 import {IMessage} from "../observe";
 import {RecipeModalController} from "../controllers/modal";
-import {alertBox} from "../utils/dom";
+import {displayAlert} from "../utils/dom";
 
 export class RecipesView implements IObserver<IMessage<Recipe[]>> {
     private readonly _controller: RecipesController;
@@ -57,7 +57,7 @@ export class RecipesView implements IObserver<IMessage<Recipe[]>> {
         }
 
         for (const alert of message.alerts) {
-            alertBox(alert);
+            displayAlert(alert);
         }
     }
 
