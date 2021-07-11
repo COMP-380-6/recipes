@@ -61,8 +61,7 @@ export function alertBox(alert: Alert) {
         error.classList.add("alert-info");
     }
 
-    (errorBtn as HTMLElement).style.visibility = "revert";
-    (error as HTMLElement).style.visibility = "revert";
+    (error as HTMLElement).style.visibility = "visible";
 
     errorText.textContent = alert.message;
     errorBtn.addEventListener(

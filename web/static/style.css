@@ -144,12 +144,3 @@ which would make the modal full screen.
         width: calc(100% / 3);
     }
 }
-
-.alert {
-    visibility: hidden;
-    display: inline-block;
-}
-
-#errorAlertButton {
-    visibility: hidden;
-}
