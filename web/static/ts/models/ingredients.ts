@@ -53,12 +53,10 @@ export class SelectedIngredients extends AlertingObservable<SelectionsDiff> {
     }
 
     addSelection(input: string): void {
-        if (this.lastSelection === undefined) {
-            // Silently fail if nothing has been selected yet.
-            return;
-        }
-
-        if (input !== this.lastSelection.name) {
+        if (
+            this.lastSelection === undefined ||
+            input !== this.lastSelection.name
+        ) {
             const alert = new ErrorAlert(
                 "A selection must be made from autocompletion."
             );

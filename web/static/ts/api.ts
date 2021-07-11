@@ -54,7 +54,7 @@ export class Client {
     private _getErrorMessage(response: Response): string {
         if (response.status === 429) {
             const seconds = response.headers.get("Retry-After");
-            return `You are searching too frequently. Please wait ${seconds} before retrying.`;
+            return `You are searching too frequently. Please wait ${seconds} seconds before retrying.`;
         } else if (response.status == 402) {
             const time = timeUntilUTCMidnight();
             return `The request quota has been reached for the day. Please come back ${time}.`;

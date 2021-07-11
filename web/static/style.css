@@ -144,3 +144,13 @@ which would make the modal full screen.
         width: calc(100% / 3);
     }
 }
+
+#alert .alert {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+#alert .alert .btn-close {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
