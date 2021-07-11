@@ -38,36 +38,29 @@ export function insertAfter(elem: Element, refElem: Element): Element {
  * @param alert The alert to display.
  */
 export function displayAlert(alert: Alert) {
-    const error = document.querySelector("#alert");
-    if (error === null) {
-        throw new TypeError("Can't display alert: alert element not found");
+    const container = document.querySelector("#alert");
+    if (container === null) {
+        throw new TypeError("Can't display alert: alert container not found");
     }
 
-    const button = error.querySelector(".btn-close");
-    if (button === null) {
-        throw new TypeError("Can't display alert: button element not found");
-    }
-
-    const errorText = error.querySelector(".alert-message");
-    if (errorText === null) {
-        throw new TypeError("Can't display alert: text element not found");
-    }
-
+    let alertClass = "";
     if (alert.severity === Severity.WARNING) {
-        error.classList.remove("alert-danger");
-        error.classList.add("alert-warning");
+        alertClass = "alert-warning";
     } else if (alert.severity === Severity.ERROR) {
-        error.classList.remove("alert-danger");
-        error.classList.add("alert-danger");
+        alertClass = "alert-danger";
     } else {
         throw new TypeError("Can't display alert: unsupported severity");
     }
 
-    (error as HTMLElement).style.visibility = "visible";
+    const element = document.createElement("div");
+    element.innerHTML = `
+        <div id="alert" class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            <span>${alert.message}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    `;
 
-    errorText.textContent = alert.message;
-    button.addEventListener(
-        "click",
-        () => ((error as HTMLElement).style.visibility = "hidden")
-    );
+    // @ts-expect-error
+    container.replaceChildren(element);
 }

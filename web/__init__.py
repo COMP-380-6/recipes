@@ -27,7 +27,7 @@ csp = (
     .connect_src("'self'")
     .form_action("'self'")
     .frame_ancestors("'self'")
-    .style_src("'self'", "'unsafe-inline'")
+    .style_src("'self'")
     .img_src("'self'", "spoonacular.com", "data:")
 )
 secure_headers = secure.Secure(permissions=secure.PermissionsPolicy())
