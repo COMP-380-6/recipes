@@ -60,4 +60,15 @@ export function displayAlert(alert: Alert) {
             </button>
         </div>
     `;
+
+    container.firstElementChild?.addEventListener("closed.bs.alert", () => {
+        // TODO: don't hard-code selecting this element.
+        // Not only should the input element not be hard coded, but this should
+        // support focusing other elements e.g. the search button, depending on
+        // the origin of the alert.
+        const input = document.querySelector(
+            "#form-ingredients input[type='search']"
+        ) as HTMLInputElement;
+        input?.focus();
+    });
 }
