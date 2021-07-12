@@ -138,7 +138,7 @@ export class RecipeRequirementsView implements IObserver<Recipe> {
         this._createEquipment(recipe);
     }
 
-    _createIngredients(recipe: Recipe) {
+    private _createIngredients(recipe: Recipe) {
         if (this._ingredientsTemplate.parentElement === null) {
             throw new TypeError(
                 "Required ingredient template doesn't have a parent"
